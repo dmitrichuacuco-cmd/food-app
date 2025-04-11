@@ -37,7 +37,7 @@
         </ion-button>
       </div>
 
-      <ion-segment value="all" color="primary" class="rounded-segment">
+      <ion-segment value="all" color="primary" class="rounded-segment" v-model="selectedCategory">
         <ion-segment-button value="all">
           <ion-label>All</ion-label>
         </ion-segment-button>
@@ -54,7 +54,7 @@
 
       <div class="reward-card-container">
         <ion-card
-          v-for="(card, index) in cards"
+          v-for="(card, index) in filteredCards"
           :key="index"
           class="reward-card"
         >
@@ -108,7 +108,7 @@ import {
   personCircleOutline,
   chevronForwardOutline,
 } from "ionicons/icons";
-import { ref, onMounted, defineProps } from "vue";
+import { ref, onMounted, defineProps, computed } from "vue";
 import { Chart, registerables } from "chart.js";
 
 Chart.register(...registerables);
@@ -142,31 +142,47 @@ onMounted(() => {
   });
 });
 
+const selectedCategory = ref("all");
+
+const filteredCards = computed(() => {
+  return cards.filter((card) => {
+    if (selectedCategory.value === "beginner") {
+      return card.cost <= 50;
+    } else if (selectedCategory.value === "intermediate") {
+      return card.cost > 50 && card.cost <= 100;
+    } else if (selectedCategory.value === "loyal") {
+      return card.cost > 100;
+    }
+    return true;
+  });
+});
+
+
 // replace with JSON data from backend API
 const cards = [
   {
-    image: "https://ionicframework.com/docs/img/demos/card-media.png",
-    title: "Card 1",
+    image: "https://imgs.search.brave.com/muBrq1pldskvUEEbWyiW5Voqc0HXcozpQitfuP50v5Q/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTcz/NjE5ODk3L3Bob3Rv/L2lza2VuZGVyLWtl/YmFiLmpwZz9zPTYx/Mng2MTImdz0wJms9/MjAmYz14UEVIbGYx/bVJJVWhKYjBvN0lY/d1pDTkpSWGp6Y1gz/Zkp4RTYzVjlCRWZr/PQ",
+    title: "Iskander Kebab",
     category: "Meat",
     cost: 20,
   },
   {
-    image: "https://ionicframework.com/docs/img/demos/card-media.png",
-    title: "Card 2",
+    image: "https://imgs.search.brave.com/SjIuL5DGY6sjo8UkYFqclHS3066lDWYSyEEEQbZCU1I/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90NC5m/dGNkbi5uZXQvanBn/LzA5Lzg2LzI4Lzcz/LzM2MF9GXzk4NjI4/NzM2MF9FUGNGNUxK/ZWZDQlp2YnJOTzA4/NExpQ2h6V2llc0Fn/Qi5qcGc",
+    title: "Chicken Biryani",
     category: "Chicken",
-    cost: 25,
-  },
-  {
-    image: "https://ionicframework.com/docs/img/demos/card-media.png",
-    title: "Card 3",
-    category: "Dessert",
     cost: 60,
   },
   {
-    image: "https://ionicframework.com/docs/img/demos/card-media.png",
-    title: "Card 4",
+    image: "https://imgs.search.brave.com/KEpixKGULxoT8WhLmP7xU-0LGDO7_toJChzAgMU-4oQ/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvNjY5/NTY2OTI0L3Bob3Rv/L2Jha2xhdmEuanBn/P3M9NjEyeDYxMiZ3/PTAmaz0yMCZjPTJY/T1dZVnhmZk5fMW5Q/dDRRNkhQRTdWOUVB/SmNTejhOX045a3Fx/cXdyM2s9",
+    title: "Baklava",
+    category: "Dessert",
+    cost: 80,
+  },
+  {
+    image: "https://imgs.search.brave.com/jEIf7JHMGzp1fhdrK2SoZgXiqdri0DzVef6KRZE-G4o/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9vdHRv/bGVuZ2hpLmNvLnVr/L2Nkbi9zaG9wL2Zp/bGVzL3NoYWtzaHVr/YS02XzFfMS5qcGc_/dj0xNzA4MDkwMjgw/JndpZHRoPTEwMDA",
+    title: "Shakshouka",
     category: "Breakfast",
-    cost: 100,
+    cost: 120,
   },
 ];
 </script>

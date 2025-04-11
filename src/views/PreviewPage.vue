@@ -313,7 +313,7 @@ const selectedBeverage = ref("Coke");
 const sides: Side[] = [
   {
     id: 1,
-    image: "https://ionicframework.com/docs/img/demos/card-media.png",
+    image: "https://imgs.search.brave.com/C5OWO521S3GwfE49js2tDhwLNq7eSZdN3vLJGQA5FYE/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvNTMx/MDQwODY3L3Bob3Rv/L3RvbWF0by1zYXVj/ZS5qcGc_cz02MTJ4/NjEyJnc9MCZrPTIw/JmM9MjBRRmsza0JW/ZlBiSUdkM0NrT2pW/XzFBR0VPM1d5ZmNs/b0doZDhNZHBGWT0",
     title: "Tomato Sauce",
     category: "Sauce",
     price: 50,
@@ -322,7 +322,7 @@ const sides: Side[] = [
   },
   {
     id: 2,
-    image: "https://ionicframework.com/docs/img/demos/card-media.png",
+    image: "https://imgs.search.brave.com/6U688BMPIgtCIJmys8-eWDlB4TrgMjg8CtE1gQNUAKg/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvMTM4/Mzg4MzU1OS9waG90/by93aGl0ZS1iYXNt/YXRpLXJpY2UuanBn/P3M9NjEyeDYxMiZ3/PTAmaz0yMCZjPU51/QVdWVWhQZS13OW9X/WVUyNkRHbGEtOWJs/TmxOSkF0MjZockVj/dDBTRmM9",
     title: "White Rice",
     category: "Carbs",
     price: 70,
@@ -331,7 +331,7 @@ const sides: Side[] = [
   },
   {
     id: 3,
-    image: "https://ionicframework.com/docs/img/demos/card-media.png",
+    image: "https://imgs.search.brave.com/DxyA0rlaDewtVNuQt_ACECEuHOBr10UlvuoSt7uJf-Q/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvODYw/NTcxNDkvcGhvdG8v/cGlncy1pbi1hLWJs/YW5rZXQuanBnP3M9/NjEyeDYxMiZ3PTAm/az0yMCZjPVBUMWhN/QVFzS0h6NGhBc2FR/ZWo4Z0ZYLUw0YlJ4/a0xUbnowQlNoUzFq/bkU9",
     title: "Pigs in a Blanket",
     category: "Protein",
     price: 55,
@@ -340,7 +340,7 @@ const sides: Side[] = [
   },
   {
     id: 4,
-    image: "https://ionicframework.com/docs/img/demos/card-media.png",
+    image: "https://imgs.search.brave.com/xSoyxkdO63QLY9YTKQZCkvj7qVtc8z2hA153fT5AMmc/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/dGhlcmVjaXBlcmVi/ZWwuY29tL3dwLWNv/bnRlbnQvdXBsb2Fk/cy8yMDIwLzA2L2Jy/ZWFkc3RpY2tzLXd3/dy50aGVyZWNpcGVy/ZWJlbC5jb20tNjAw/LTMtb2YtMjMuanBn",
     title: "Breadsticks",
     category: "Carbs",
     price: 70,

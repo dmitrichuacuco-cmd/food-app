@@ -267,7 +267,7 @@ const selectedPayment = ref("1");
 const paymentOptions = [
   {
     value: "1",
-    title: "Call on Delivery",
+    title: "Cash on Delivery",
     description: "Pay when you receive the order",
   },
   {
