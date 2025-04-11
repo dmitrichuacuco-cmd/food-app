@@ -3,13 +3,66 @@
     <ion-split-pane content-id="main-content">
       <ion-menu content-id="main-content" type="overlay">
         <ion-content>
-          <ion-list id="inbox-list">
-            <ion-list-header>Inbox</ion-list-header>
-            <ion-note>hi@ionicframework.com</ion-note>
+          <ion-card class="ion-no-margin ion-padding-top">
+            <ion-card-content>
+              <ion-grid>
+                <ion-row class="ion-align-items-center">
+                  <ion-col size="2" class="ion-text-center">
+                    <ion-avatar style="width: 48px; height: 48px; margin: 0 auto;">
+                      <img src="/images/favicon.png" alt="Profile" />
+                    </ion-avatar>
+                  </ion-col>
 
-            <ion-menu-toggle :auto-hide="false" v-for="(p, i) in appPages" :key="i">
-              <ion-item @click="selectedIndex = i" router-direction="root" :router-link="p.url" lines="none" :detail="false" class="hydrated" :class="{ selected: selectedIndex === i }">
-                <ion-icon aria-hidden="true" slot="start" :ios="p.iosIcon" :md="p.mdIcon"></ion-icon>
+                  <ion-col size="10" class="ion-padding-start" @click="goToPoints">
+                    <ion-item lines="none" button detail>
+                      <ion-icon
+                        :icon="diamondOutline"
+                        style="padding-left: 8px; padding-right: 8px"
+                      ></ion-icon>
+                      <ion-label>
+                        <strong>{{ user.points }} Points</strong>
+                      </ion-label>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+
+                <ion-row>
+                  <ion-col size="12">
+                    <ion-text class="ion-margin-top">
+                      <h2 style="font-weight: bold; color: white">
+                        {{ user.firstName }} {{ user.lastName }}
+                      </h2>
+                      <p color="medium">
+                        {{ user.contactNumber }}
+                      </p>
+                    </ion-text>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-card-content>
+          </ion-card>
+
+          <ion-list id="inbox-list">
+            <ion-menu-toggle
+              :auto-hide="false"
+              v-for="(p, i) in appPages"
+              :key="i"
+            >
+              <ion-item
+                @click="selectedIndex = i"
+                router-direction="root"
+                :router-link="p.url"
+                lines="none"
+                :detail="false"
+                class="hydrated"
+                :class="{ selected: selectedIndex === i }"
+              >
+                <ion-icon
+                  aria-hidden="true"
+                  slot="start"
+                  :ios="p.iosIcon"
+                  :md="p.mdIcon"
+                ></ion-icon>
                 <ion-label>{{ p.title }}</ion-label>
               </ion-item>
             </ion-menu-toggle>
@@ -17,10 +70,18 @@
 
           <ion-list id="labels-list">
             <ion-list-header>Labels</ion-list-header>
-
-            <ion-item v-for="(label, index) in labels" lines="none" :key="index">
-              <ion-icon aria-hidden="true" slot="start" :ios="bookmarkOutline" :md="bookmarkSharp"></ion-icon>
-              <ion-label>{{ label }}</ion-label>
+            <ion-item
+              v-for="(sideMenuOption, index) in sideMenuOptions"
+              :key="index"
+              lines="none"
+            >
+              <ion-icon
+                aria-hidden="true"
+                slot="start"
+                :ios="sideMenuOption.ios"
+                :md="sideMenuOption.md"
+              ></ion-icon>
+              <ion-label>{{ sideMenuOption.label }}</ion-label>
             </ion-item>
           </ion-list>
         </ion-content>
@@ -44,8 +105,15 @@ import {
   IonNote,
   IonRouterOutlet,
   IonSplitPane,
-} from '@ionic/vue';
-import { ref } from 'vue';
+  IonText,
+  IonCard,
+  IonCardContent,
+  IonGrid,
+  IonRow,
+  IonCol,
+  IonAvatar,
+} from "@ionic/vue";
+import { ref } from "vue";
 import {
   archiveOutline,
   archiveSharp,
@@ -55,58 +123,78 @@ import {
   heartSharp,
   mailOutline,
   mailSharp,
-  paperPlaneOutline,
-  paperPlaneSharp,
-  trashOutline,
-  trashSharp,
-  warningOutline,
-  warningSharp,
-} from 'ionicons/icons';
+  homeOutline,
+  homeSharp,
+  cartOutline,
+  cartSharp,
+  notificationsOutline,
+  notificationsSharp,
+  locationOutline,
+  locationSharp,
+  helpCircleOutline,
+  helpCircleSharp,
+  diamondOutline,
+} from "ionicons/icons";
+
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+const goToPoints = () => {
+  router.push("/points");
+};
 
 const selectedIndex = ref(0);
 const appPages = [
   {
-    title: 'Inbox',
-    url: '/folder/Inbox',
-    iosIcon: mailOutline,
-    mdIcon: mailSharp,
+    title: "Home",
+    url: "/home",
+    iosIcon: homeOutline,
+    mdIcon: homeSharp,
   },
   {
-    title: 'Outbox',
-    url: '/folder/Outbox',
-    iosIcon: paperPlaneOutline,
-    mdIcon: paperPlaneSharp,
+    title: "Order Now!",
+    url: "/order",
+    iosIcon: cartOutline,
+    mdIcon: cartSharp,
   },
   {
-    title: 'Favorites',
-    url: '/folder/Favorites',
-    iosIcon: heartOutline,
-    mdIcon: heartSharp,
+    title: "Notifications",
+    url: "/notifications",
+    iosIcon: notificationsOutline,
+    mdIcon: notificationsSharp,
   },
   {
-    title: 'Archived',
-    url: '/folder/Archived',
-    iosIcon: archiveOutline,
-    mdIcon: archiveSharp,
+    title: "Store Locator",
+    url: "/store-locator",
+    iosIcon: locationOutline,
+    mdIcon: locationSharp,
   },
   {
-    title: 'Trash',
-    url: '/folder/Trash',
-    iosIcon: trashOutline,
-    mdIcon: trashSharp,
-  },
-  {
-    title: 'Spam',
-    url: '/folder/Spam',
-    iosIcon: warningOutline,
-    mdIcon: warningSharp,
+    title: "FAQ's",
+    url: "/faq",
+    iosIcon: helpCircleOutline,
+    mdIcon: helpCircleSharp,
   },
 ];
-const labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
+const sideMenuOptions = [
+  { label: "My Orders", ios: cartOutline, md: cartSharp },
+  { label: "My Account", ios: archiveOutline, md: archiveSharp },
+  { label: "My Favorites", ios: heartOutline, md: heartSharp },
+  { label: "Order Tracker", ios: bookmarkOutline, md: bookmarkSharp },
+  { label: "Order History", ios: mailOutline, md: mailSharp },
+];
 
-const path = window.location.pathname.split('folder/')[1];
+const user = {
+  firstName: "Sung",
+  lastName: "Jin-Woo",
+  contactNumber: "+63 912 345 6789",
+  points: 120,
+  email: "sololeveling@gmail.com",
+};
+
+const path = window.location.pathname.split("/")[1];
 if (path !== undefined) {
-  selectedIndex.value = appPages.findIndex((page) => page.title.toLowerCase() === path.toLowerCase());
+  selectedIndex.value = appPages.findIndex((page) => page.url.includes(path));
 }
 </script>
 
@@ -229,5 +317,64 @@ ion-note {
 
 ion-item.selected {
   --color: var(--ion-color-primary);
+}
+
+.user-profile {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.profile-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.profile-image-container {
+  margin-bottom: 0;
+}
+
+.profile-image {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.user-info {
+  margin-bottom: 8px;
+}
+
+.user-name {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0;
+  margin-bottom: 4px;
+}
+
+.user-contact {
+  font-size: 14px;
+  color: var(--ion-color-medium);
+  margin: 0;
+}
+
+.points-container {
+  display: flex;
+  align-items: center;
+  margin-top: 6px;
+}
+
+.crown-icon {
+  margin-right: 6px;
+  font-size: 16px;
+}
+
+.points-text {
+  margin-right: 6px;
+  font-weight: 500;
 }
 </style>
